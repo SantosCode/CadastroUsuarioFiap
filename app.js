@@ -8,7 +8,6 @@ const logger = require("morgan");
 const indexRouter = require("./routes/indexRoute");
 const loginRouter = require("./routes/loginRoute");
 const usersRouter = require("./routes/usersRoute");
-const financeRouter = require("./routes/financeRoute");
 
 mongoose.connect(
   settings.dbpath,
@@ -30,7 +29,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(indexRouter);
 app.use(loginRouter);
 app.use(usersRouter);
-app.use(financeRouter);
 
 app.use((req, res) => {
   res.type("application/json");
