@@ -1,0 +1,68 @@
+@baseUrl = http://localhost:3000
+
+### Gerar Token
+# @name login
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "username": "rei_luis17",
+  "password": "Password123"
+}
+
+### Token gerado
+@authToken = {{login.response.body.token}} 
+
+### Listar Usuarios
+GET {{baseUrl}}/users
+Accept: application/json
+Token: {{authToken}}
+
+### Buscar usuario pelo username
+GET {{baseUrl}}/user/rei_luis18
+Accept: application/json
+Token: {{authToken}}
+
+### Cadastrar usuario
+POST {{baseUrl}}/users/insert
+Content-Type: application/json
+Token: {{authToken}}
+
+{
+  "username" : "rei_luis19",
+  "password" : "Mudar123",
+  "email" : "rei_luis19@icloud.com",
+  "fullName": "Luis Santos"
+}
+
+### Atualizar senha de Usuario
+PUT {{baseUrl}}/user/password
+Content-Type: application/json
+Token: {{authToken}}
+
+{
+  "username" : "rei_luis17",
+  "newPassword" : "Password123"
+}
+
+### Cadastrar Finance
+POST {{baseUrl}}/finance/insert
+Content-Type: application/json
+Token: {{authToken}}
+
+{
+  "bank_name": "Itau",
+  "count_type": "Poupança",
+  "holder_name": "Luis Santos",
+  "card_limit": "5.000"
+}
+
+### Listar todos os finance
+GET {{baseUrl}}/finance
+Accept: application/json
+Token: {{authToken}}
+
+### Retorna usuario passando o nome de titular como parametro
+GET {{baseUrl}}/finance/Luis Santos
+Accept: application/json
+Token: {{authToken}}
